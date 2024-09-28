@@ -1,15 +1,16 @@
 #ifndef ENGINE_H
 #define ENGINE_H
 
+#include "gamestate.h"
 
 class Engine
 {
 
     public:
-        int run();
+        [[nodiscard]] int run();
 
     private:
-
+        Gamestate gamestate;
 };
 
 #endif
