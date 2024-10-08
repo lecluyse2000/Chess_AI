@@ -3,14 +3,9 @@
 
 #include "gamestate.h"
 
-class Engine
+namespace Engine
 {
-
-    public:
-        [[nodiscard]] int run();
-
-    private:
-        Gamestate gamestate;
-};
+    [[nodiscard]] int run();
+}
 
 #endif

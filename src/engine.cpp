@@ -1,6 +1,11 @@
 #include "engine.h"
 
-[[nodiscard]] int Engine::run()
+namespace Engine
+{
+
+[[nodiscard]] int run()
 {
     return 0;
+}
+
 }

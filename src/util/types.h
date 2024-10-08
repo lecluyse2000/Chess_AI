@@ -4,6 +4,8 @@
 enum Piece : int
 {
 
+    BL_ROOK, BL_KNIGHT, BL_BISHOP, BL_QUEEN, BL_KING,
+    WH_ROOK, WH_KNIGHT, WH_BISHOP, WH_QUEEN, WH_KING
 
 };
 

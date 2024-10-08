@@ -3,7 +3,8 @@
 
 class WhitePieces
 {
-
+    public:
+        
 };
 
 #endif
