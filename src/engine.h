@@ -5,7 +5,7 @@
 
 namespace Engine
 {
-    [[nodiscard]] int run();
+    [[nodiscard]] int run(const bool analysis_mode);
 }
 
 #endif
