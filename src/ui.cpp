@@ -1,5 +1,6 @@
 #include "ui.h"
 
+#include <cstdint>
 #include <iostream>
 #include <optional>
 #include <string>
@@ -12,7 +13,7 @@ namespace UI
     std::string player_color;
 
     while (true) {
-    std::cout << "Would you like to be white or black? (W/B): ";
+        std::cout << "Would you like to be white or black? (W/B): ";
 
         if (!std::getline(std::cin, player_color)) [[unlikely]] {
             std::cerr << "An error has occurred!\n\n"; 
@@ -22,10 +23,11 @@ namespace UI
         if (player_color != "W" && player_color != "w" &&
             player_color != "B" && player_color != "b") {
             std::cout << "Invalid input! Try again.\n";
+        } else {
+            return player_color == "W" || player_color == "w";
         }
     }
 
-    return player_color == "W" || player_color == "w";
 }
 
 [[nodiscard]] static std::optional<bool> verify_exit(const std::string_view input_expression)
@@ -50,9 +52,14 @@ namespace UI
     return exit_flag == "Y" || exit_flag == "y" || exit_flag.empty();
 }
 
-[[nodiscard]] static void parse_input(const std::string_view input_expression)
+[[nodiscard]]
+static std::optional<std::pair<std::uint64_t, std::uint64_t> > parse_input(const std::string_view input_expression)
 {
-
+    for (const auto& character : input_expression) {
+        if (std::isspace(character)) {
+            continue;
+        }
+    }
 }
 
 [[nodiscard]] std::optional<std::pair<std::uint64_t, std::uint64_t> > get_player_move()
