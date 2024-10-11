@@ -19,14 +19,13 @@ class Gamestate
         std::uint64_t white_bishops;
         std::uint64_t white_queen;
         std::uint64_t white_king;
-        Pawns white_pawns;
 
         std::uint64_t black_rooks;
         std::uint64_t black_knights;
         std::uint64_t black_bishops;
         std::uint64_t black_queen;
         std::uint64_t black_king;
-        Pawns black_pawns;
+        Pawns pawns;
         
     private:
 };

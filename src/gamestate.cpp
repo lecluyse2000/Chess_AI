@@ -16,4 +16,4 @@ Gamestate::Gamestate() :
         black_bishops(0x2400000000000000),
         black_queen(0x0800000000000000),
         black_king(0x1000000000000000)
-{};
+{}
