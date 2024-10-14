@@ -54,7 +54,7 @@ namespace UI
 }
 
 [[nodiscard]]
-static std::optional<std::pair<Piece, std::uint64_t> > parse_input(const std::string_view input_expression)
+static constexpr std::optional<std::pair<Piece, std::uint64_t> > parse_input(const std::string_view input_expression)
 {
     if (input_expression.length() > 12) {
         std::cerr << "The input is too long!\n\n";

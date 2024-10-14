@@ -6,7 +6,7 @@
 namespace Engine
 {
 
-static void normal_mode()
+static void game_mode()
 {
     Gamestate current_gamestate;
     const std::optional<bool> player_is_white = UI::get_player_color();
@@ -19,7 +19,7 @@ static void normal_mode()
 {
 
     if (!analysis_mode) {
-        normal_mode();
+        game_mode();
     } 
 
     return 0;
