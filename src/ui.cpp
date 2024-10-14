@@ -54,7 +54,7 @@ namespace UI
 }
 
 [[nodiscard]]
-static constexpr std::optional<std::pair<Piece, std::uint64_t> > parse_input(const std::string_view input_expression)
+static constexpr std::optional<std::pair<Types::Piece, std::uint64_t> > parse_input(const std::string_view input_expression)
 {
     if (input_expression.length() > 12) {
         std::cerr << "The input is too long!\n\n";
@@ -67,7 +67,7 @@ static constexpr std::optional<std::pair<Piece, std::uint64_t> > parse_input(con
     }
 }
 
-[[nodiscard]] std::optional<std::pair<Piece, std::uint64_t> > get_player_move(const auto& current_moves)
+[[nodiscard]] std::optional<std::pair<Types::Piece, std::uint64_t> > get_player_move(const auto& current_moves)
 {
     std::string input_expression;
 

@@ -13,6 +13,7 @@ int main(int argc, char* const argv[])
             std::cerr << "Invalid flag!\n\n";
             return 1;
         }
+
         return Engine::run(true);
     }
 
