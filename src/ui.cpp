@@ -4,12 +4,13 @@
 #include <iostream>
 #include <optional>
 #include <string>
+#include <string_view>
 #include "util/types.h"
 
 namespace UI
 {
 
-[[nodiscard]] std::optional<bool> get_player_color()
+[[nodiscard]] std::optional<const bool> get_player_color()
 {
     std::string player_color;
 
@@ -31,7 +32,7 @@ namespace UI
     return player_color == "W" || player_color == "w";
 }
 
-[[nodiscard]] static std::optional<bool> verify_exit(const std::string_view input_expression)
+[[nodiscard]] static std::optional<const bool> verify_input(const std::string_view input_expression)
 {
     std::string exit_flag = "a";
 
@@ -53,8 +54,8 @@ namespace UI
     return exit_flag == "Y" || exit_flag == "y" || exit_flag.empty();
 }
 
-[[nodiscard]]
-static constexpr std::optional<std::pair<Types::Piece, std::uint64_t> > parse_input(const std::string_view input_expression)
+[[nodiscard]] static
+constexpr std::optional<std::pair<Types::Piece, std::uint64_t> > parse_input(const std::string_view input_expression)
 {
     if (input_expression.length() > 12) {
         std::cerr << "The input is too long!\n\n";
@@ -79,9 +80,12 @@ static constexpr std::optional<std::pair<Types::Piece, std::uint64_t> > parse_in
             return std::nullopt;
         }
 
-        const auto exit_flag = verify_exit(input_expression);
+        const auto exit_flag = verify_input(input_expression);
         if (!exit_flag) {
             return std::nullopt;
+        }
+        if (!*exit_flag) {
+            continue; 
         }
 
         const auto parse_result = parse_input(input_expression);
