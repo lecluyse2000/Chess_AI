@@ -81,17 +81,11 @@ constexpr std::optional<std::pair<Types::Piece, std::uint64_t> > parse_input(con
         }
 
         const auto exit_flag = verify_input(input_expression);
-        if (!exit_flag) [[unlikely]] {
-            return std::nullopt;
-        }
-        if (!*exit_flag) {
-            continue; 
-        }
+        if (!exit_flag) [[unlikely]] return std::nullopt;
+        if (!*exit_flag) continue;
 
         const auto parse_result = parse_input(input_expression);
-        if (!parse_result) {
-            return std::nullopt;
-        }
+        if (!parse_result) return std::nullopt;
     }
 }
 
