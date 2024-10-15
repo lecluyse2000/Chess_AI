@@ -6,22 +6,25 @@
 namespace Types
 {
 
-inline constexpr std::uint64_t rank_1 = 0x00000000000000FF;
-inline constexpr std::uint64_t rank_2 = 0x000000000000FF00;
-inline constexpr std::uint64_t rank_3 = 0x0000000000FF0000;
-inline constexpr std::uint64_t rank_4 = 0x00000000FF000000;
-inline constexpr std::uint64_t rank_5 = 0x000000FF00000000;
-inline constexpr std::uint64_t rank_6 = 0x0000FF0000000000;
-inline constexpr std::uint64_t rank_7 = 0x00FF000000000000;
-inline constexpr std::uint64_t rank_8 = 0xFF00000000000000;
-inline constexpr std::uint64_t file_a = 0x0101010101010101;
-inline constexpr std::uint64_t file_b = 0x0202020202020202;
-inline constexpr std::uint64_t file_c = 0x0404040404040404;
-inline constexpr std::uint64_t file_d = 0x0808080808080808;
-inline constexpr std::uint64_t file_e = 0x1010101010101010;
-inline constexpr std::uint64_t file_f = 0x2020202020202020;
-inline constexpr std::uint64_t file_g = 0x4040404040404040;
-inline constexpr std::uint64_t file_h = 0x8080808080808080;
+inline constexpr std::uint64_t rank_1 = 0x00000000000000FFULL;
+inline constexpr std::uint64_t rank_2 = 0x000000000000FF00ULL;
+inline constexpr std::uint64_t rank_3 = 0x0000000000FF0000ULL;
+inline constexpr std::uint64_t rank_4 = 0x00000000FF000000ULL;
+inline constexpr std::uint64_t rank_5 = 0x000000FF00000000ULL;
+inline constexpr std::uint64_t rank_6 = 0x0000FF0000000000ULL;
+inline constexpr std::uint64_t rank_7 = 0x00FF000000000000ULL;
+inline constexpr std::uint64_t rank_8 = 0xFF00000000000000ULL;
+inline constexpr std::uint64_t file_a = 0x0101010101010101ULL;
+inline constexpr std::uint64_t file_b = 0x0202020202020202ULL;
+inline constexpr std::uint64_t file_c = 0x0404040404040404ULL;
+inline constexpr std::uint64_t file_d = 0x0808080808080808ULL;
+inline constexpr std::uint64_t file_e = 0x1010101010101010ULL;
+inline constexpr std::uint64_t file_f = 0x2020202020202020ULL;
+inline constexpr std::uint64_t file_g = 0x4040404040404040ULL;
+inline constexpr std::uint64_t file_h = 0x8080808080808080ULL;
+inline constexpr std::uint64_t main_diagonal = 0x8040201008040201ULL;
+inline constexpr std::uint64_t light_squares = 0x55AA55AA55AA55AAULL;
+inline constexpr std::uint64_t dark_squares = 0xAA55AA55AA55AA55ULL;
 
 enum Piece : int
 {
