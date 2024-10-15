@@ -3,6 +3,7 @@
 #ifndef TYPES_H
 #define TYPES_H
 
+#include <array>
 #include <cstdint>
 
 namespace Types
@@ -29,6 +30,8 @@ inline constexpr std::uint64_t file_h = 0x8080808080808080ULL;
 inline constexpr std::uint64_t main_diagonal = 0x8040201008040201ULL;
 inline constexpr std::uint64_t light_squares = 0x55AA55AA55AA55AAULL;
 inline constexpr std::uint64_t dark_squares = 0xAA55AA55AA55AA55ULL;
+
+inline constexpr std::array<std::uint64_t, 4> knight_bit_shifts = {6, 15, 17, 10};
 
 enum Piece
 {

@@ -32,7 +32,7 @@ namespace Engine
     for (const auto pos : knight_positions) {
         if (!pos) return move_board;
 
-        for (const auto bit_shift : knight_bit_shifts) {
+        for (const auto bit_shift : Types::knight_bit_shifts) {
             move_board |= (pos << bit_shift) | (pos >> bit_shift);
         }
     }
