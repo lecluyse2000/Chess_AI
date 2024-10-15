@@ -1,3 +1,5 @@
+//Author: Caden LeCluyse
+
 #ifndef TYPES_H
 #define TYPES_H
 
@@ -5,6 +7,8 @@
 
 namespace Types
 {
+
+//constexpr bit masks for bit manipulation
 
 inline constexpr std::uint64_t rank_1 = 0x00000000000000FFULL;
 inline constexpr std::uint64_t rank_2 = 0x000000000000FF00ULL;
@@ -26,7 +30,7 @@ inline constexpr std::uint64_t main_diagonal = 0x8040201008040201ULL;
 inline constexpr std::uint64_t light_squares = 0x55AA55AA55AA55AAULL;
 inline constexpr std::uint64_t dark_squares = 0xAA55AA55AA55AA55ULL;
 
-enum Piece : int
+enum Piece
 {
 
     BL_ROOK, BL_KNIGHT, BL_BISHOP, BL_QUEEN, BL_KING,
@@ -34,7 +38,7 @@ enum Piece : int
 
 };
 
-enum Square : int
+enum Square
 {
     A1_SQ, B1_SQ, C1_SQ, D1_SQ, E1_SQ, F1_SQ, G1_SQ, H1_SQ,
     A2_SQ, B2_SQ, C2_SQ, D2_SQ, E2_SQ, F2_SQ, G2_SQ, H2_SQ,
@@ -48,6 +52,6 @@ enum Square : int
     NUM_SQ = 64
 };
 
-}
+} // namespace Types
 
 #endif

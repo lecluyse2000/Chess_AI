@@ -1,3 +1,5 @@
+//Author: Caden LeCluyse
+
 #include "engine.h"
 #include <iostream>
 #include <string>

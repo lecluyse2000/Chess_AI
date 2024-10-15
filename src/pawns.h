@@ -1,3 +1,5 @@
+//Author: Caden LeCluyse
+
 #ifndef PAWNS_H
 #define PAWNS_H
 

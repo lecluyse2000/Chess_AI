@@ -1,4 +1,8 @@
+//Author: Caden LeCluyse
+
 #include "gamestate.h"
+
+// @Desc: Default constructor for gamestate that initializes each piece to their proper position, as well as castling.
 
 Gamestate::Gamestate() : 
         white_can_castle_kingside(false),

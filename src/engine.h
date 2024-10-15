@@ -1,3 +1,5 @@
+//Author: Caden LeCluyse
+
 #ifndef ENGINE_H
 #define ENGINE_H
 

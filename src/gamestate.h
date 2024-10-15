@@ -1,3 +1,5 @@
+//Author: Caden LeCluyse
+
 #ifndef GAMESTATE_H
 #define GAMESTATE_H
 

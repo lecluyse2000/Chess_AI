@@ -1,3 +1,5 @@
+//Author: Caden LeCluyse
+
 #include "engine.h"
 
 #include "gamestate.h"
@@ -23,4 +25,4 @@ static inline void game_mode()
     return 0;
 }
 
-}
+} // namespace Engine
