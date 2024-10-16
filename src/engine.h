@@ -4,14 +4,13 @@
 #define ENGINE_H
 
 #include <array>
-#include <bit>
 #include <cstdint>
 #include "util/util.h"
 
 namespace Engine
 {
 
-// @Param bitboard: A valid bitboard with at least one knight on it 
+// @Param pos: A valid bitboard with at least one knight on it 
 // @Return: A bitboard with all available knight moves
 
 [[nodiscard]] static consteval std::uint64_t get_knight_moves(const std::uint64_t pos)
@@ -29,7 +28,7 @@ namespace Engine
 // @Desc: Compile time function to generate the lookup table for knights
 // @Return: The lookup table
 
-[[nodiscard]] consteval std::array<std::uint64_t, 64> generate_knight_lookup_table()
+[[nodiscard]] static consteval std::array<std::uint64_t, 64> generate_knight_lookup_table()
 {
     std::array<std::uint64_t, 64> table;
     for (int i = 0; i < 64; ++i) {
