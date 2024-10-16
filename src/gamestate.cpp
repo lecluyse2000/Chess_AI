@@ -1,23 +1,35 @@
 //Author: Caden LeCluyse
 
 #include "gamestate.h"
+#include <cstdint>
 
-// @Desc: Default constructor for gamestate that initializes each piece to their proper position, as well as castling.
+// @Return: A bitboard of all white pieces
 
-Gamestate::Gamestate() noexcept : 
-        white_can_castle_kingside(false),
-        white_can_castle_queenside(false),
-        black_can_castle_kingside(false),
-        black_can_castle_queenside(false),
-        white_to_move(true),
-        white_rooks(0x0000000000000081),
-        white_knights(0x0000000000000042),
-        white_bishops(0x0000000000000024),
-        white_queen(0x0000000000000010),
-        white_king(0x0000000000000008),
-        black_rooks(0x8100000000000000),
-        black_knights(0x4200000000000000),
-        black_bishops(0x2400000000000000),
-        black_queen(0x0800000000000000),
-        black_king(0x1000000000000000)
-{}
+[[nodiscard]] inline constexpr std::uint64_t Gamestate::get_white_pieces()
+{
+    return white_king |
+           white_queen |
+           white_rooks |
+           white_knights |
+           white_bishops |
+           pawns.white_pawns;
+}
+
+// @Return: A bitboard of all black pieces
+
+[[nodiscard]] inline constexpr std::uint64_t Gamestate::get_black_pieces()
+{
+    return black_king |
+           black_queen |
+           black_rooks |
+           black_knights |
+           black_bishops |
+           pawns.black_pawns;
+}
+
+// @Return: A bitboard of all pieces
+
+[[nodiscard]] inline constexpr std::uint64_t Gamestate::get_all_pieces()
+{
+    return get_white_pieces() | get_black_pieces();
+}

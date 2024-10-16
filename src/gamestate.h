@@ -9,7 +9,26 @@
 class Gamestate
 {
     public:
-        Gamestate() noexcept;
+
+        // @Desc: Default constructor for gamestate that initializes each piece to their proper position, as well as castling.
+        constexpr Gamestate() noexcept : 
+            white_can_castle_kingside(false),
+            white_can_castle_queenside(false),
+            black_can_castle_kingside(false),
+            black_can_castle_queenside(false),
+            white_to_move(true),
+            white_rooks(0x0000000000000081ULL),
+            white_knights(0x0000000000000042ULL),
+            white_bishops(0x0000000000000024ULL),
+            white_queen(0x0000000000000010ULL),
+            white_king(0x0000000000000008ULL),
+            black_rooks(0x8100000000000000ULL),
+            black_knights(0x4200000000000000ULL),
+            black_bishops(0x2400000000000000ULL),
+            black_queen(0x0800000000000000ULL),
+            black_king(0x1000000000000000ULL)
+        {}
+
         bool white_can_castle_kingside;
         bool white_can_castle_queenside;
         bool black_can_castle_kingside;
@@ -28,6 +47,10 @@ class Gamestate
         std::uint64_t black_queen;
         std::uint64_t black_king;
         Pawns pawns;
+        
+        [[nodiscard]] inline constexpr std::uint64_t get_white_pieces();
+        [[nodiscard]] inline constexpr std::uint64_t get_black_pieces();
+        [[nodiscard]] inline constexpr std::uint64_t get_all_pieces();
         
     private:
 };

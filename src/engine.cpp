@@ -11,15 +11,20 @@
 namespace Engine
 {
 
+[[nodiscard]] constexpr std::uint64_t get_bishop_moves(const std::uint64_t bitboard)
+{
+
+}
+
 static inline void game_mode()
 {
-    Gamestate current_gamestate;
     const std::optional<const bool> player_is_white = UI::get_player_color();
     if (!player_is_white) [[unlikely]] return;
 }
 
 [[nodiscard]] int run(const bool analysis_mode)
 {
+    constexpr Gamestate current_gamestate;
     if (!analysis_mode) {
         game_mode();
     } 
