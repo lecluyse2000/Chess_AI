@@ -4,7 +4,7 @@
 
 // @Desc: Default constructor for gamestate that initializes each piece to their proper position, as well as castling.
 
-Gamestate::Gamestate() : 
+Gamestate::Gamestate() noexcept : 
         white_can_castle_kingside(false),
         white_can_castle_queenside(false),
         black_can_castle_kingside(false),

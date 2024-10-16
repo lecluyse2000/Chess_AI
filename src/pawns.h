@@ -8,7 +8,7 @@
 class Pawns
 {
     public:
-        Pawns(); 
+        Pawns() noexcept; 
         std::uint64_t white_pawns;
         std::uint64_t black_pawns;
 

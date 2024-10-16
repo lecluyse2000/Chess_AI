@@ -23,7 +23,7 @@ inline constexpr std::uint64_t shift_up(const std::uint64_t current_position)
 [[nodiscard]]
 inline constexpr std::uint64_t shift_down(const std::uint64_t current_position)
 {
-    return current_position >>  8;
+    return current_position >> 8;
 }
 
 // @Param current_position: Any bitboard
@@ -32,7 +32,7 @@ inline constexpr std::uint64_t shift_down(const std::uint64_t current_position)
 [[nodiscard]]
 inline constexpr std::uint64_t shift_right(const std::uint64_t current_position)
 {
-    return (current_position & Types::file_h) ? 0 : current_position << 1;
+    return (current_position & ~Types::file_h) << 1;
 }
 
 // @Param current_position: Any bitboard
@@ -41,7 +41,7 @@ inline constexpr std::uint64_t shift_right(const std::uint64_t current_position)
 [[nodiscard]]
 inline constexpr std::uint64_t shift_left(const std::uint64_t current_position)
 {
-    return (current_position & Types::file_a) ? 0 : current_position >> 1;
+    return (current_position & ~Types::file_a) >> 1;
 }
 
 // @Param current_position: Any bitboard

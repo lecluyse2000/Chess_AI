@@ -10,6 +10,7 @@
 #include <optional>
 #include "ui.h"
 #include "util.h"
+#include <iostream>
 
 
 namespace Engine
@@ -23,18 +24,17 @@ namespace Engine
     const std::uint64_t num_knights = std::popcount(bitboard);
     assert(num_knights == 1 || num_knights == 2);
     std::uint64_t move_board = 0;
-    std::array<std::uint64_t, 2> knight_positions = {Util::get_least_sig_bit(bitboard), 0};
-
-    if (num_knights == 2) {
-        knight_positions[1] = Util::clear_least_sig_bit(bitboard);
-    }
+    const std::array<const std::uint64_t, 2> knight_positions = {Util::get_least_sig_bit(bitboard),
+                                                                (num_knights == 2) ? Util::clear_least_sig_bit(bitboard) : 0};
 
     for (const auto pos : knight_positions) {
         if (!pos) return move_board;
 
-        for (const auto bit_shift : Types::knight_bit_shifts) {
-            move_board |= (pos << bit_shift) | (pos >> bit_shift);
-        }
+        // I hope with inlining and optimizations all this will be properly optimized
+        move_board |= (Util::shift_left(pos) | Util::shift_right(pos)) << 16;
+        move_board |= (Util::shift_left(pos) | Util::shift_right(pos)) >> 16;
+        move_board |= (Util::shift_left(Util::shift_left(pos)) | Util::shift_right(Util::shift_right(pos))) << 8;
+        move_board |= (Util::shift_left(Util::shift_left(pos)) | Util::shift_right(Util::shift_right(pos))) >> 8;
     }
 
     return move_board;

@@ -9,7 +9,7 @@
 class Gamestate
 {
     public:
-        Gamestate();
+        Gamestate() noexcept;
         bool white_can_castle_kingside;
         bool white_can_castle_queenside;
         bool black_can_castle_kingside;
