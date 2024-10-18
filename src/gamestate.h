@@ -3,8 +3,8 @@
 #ifndef GAMESTATE_H
 #define GAMESTATE_H
 
-#include <bit>
 #include <cstdint>
+#include <vector>
 #include "table.h"
 #include "util.h"
 
@@ -54,7 +54,7 @@ struct Gamestate
 
         // @Return: A bitboard of all white pieces
 
-        [[nodiscard]] inline constexpr std::uint64_t get_white_pieces()
+        [[nodiscard]] inline constexpr std::uint64_t get_white_pieces() const noexcept
         {
             return white_king |
                    white_queen |
@@ -66,7 +66,7 @@ struct Gamestate
 
         // @Return: A bitboard of all black pieces
 
-        [[nodiscard]] inline constexpr std::uint64_t get_black_pieces()
+        [[nodiscard]] inline constexpr std::uint64_t get_black_pieces() const noexcept
         {
             return black_king |
                    black_queen |
@@ -78,46 +78,47 @@ struct Gamestate
 
         // @Return: A bitboard of all pieces
 
-        [[nodiscard]] inline constexpr std::uint64_t get_all_pieces()
+        [[nodiscard]] inline constexpr std::uint64_t get_all_pieces() const noexcept
         {
             return get_white_pieces() | get_black_pieces();
         }
 
-        [[nodiscard]] inline constexpr std::uint64_t get_white_pawn_moves()
+        [[nodiscard]] inline constexpr std::uint64_t get_white_pawn_moves() const noexcept
         {
             std::uint64_t current_bitboard = white_pawns;
-            std::uint64_t current_bit = Util::get_least_sig_bit(current_bitboard);
             std::uint64_t moves = 0;
             
             while (current_bitboard) {
+                const std::uint64_t current_bit = Util::get_least_sig_bit(current_bitboard);
                 moves |= Table::white_pawn_attacks[current_bit] & get_black_pieces();
                 moves |= (current_bit & Types::rank_2) ? (current_bit << 8 | current_bit << 16) & ~get_all_pieces()
                                                        : (current_bit << 8) & ~get_all_pieces();
 
                 current_bitboard = Util::clear_least_sig_bit(current_bitboard);
-                current_bit = Util::get_least_sig_bit(current_bitboard);
             }
             
             return moves;
         }
 
-        [[nodiscard]] inline constexpr std::uint64_t get_black_pawn_moves()
+        [[nodiscard]] inline constexpr std::uint64_t get_black_pawn_moves() const noexcept
         {
             std::uint64_t current_bitboard = black_pawns;
-            std::uint64_t current_bit = Util::get_least_sig_bit(current_bitboard);
             std::uint64_t moves = 0;
             
             while (current_bitboard) {
+                const std::uint64_t current_bit = Util::get_least_sig_bit(current_bitboard);
                 moves |= Table::black_pawn_attacks[current_bit] & get_white_pieces();
                 moves |= (current_bit & Types::rank_7) ? (current_bit >> 8 | current_bit >> 16) & ~get_all_pieces()
                                                        : (current_bit >> 8) & ~get_all_pieces();
 
                 current_bitboard = Util::clear_least_sig_bit(current_bitboard);
-                current_bit = Util::get_least_sig_bit(current_bitboard);
             }
             
             return moves;
         }
+
+        [[nodiscard]] std::vector<std::pair<std::uint64_t, std::uint64_t> > get_white_knight_moves() const noexcept;
+        [[nodiscard]] std::vector<std::pair<std::uint64_t, std::uint64_t> > get_black_knight_moves() const noexcept;
 };
 
 #endif
