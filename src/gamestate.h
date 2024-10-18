@@ -119,6 +119,9 @@ struct Gamestate
             
             return moves;
         }
+
+        [[nodiscard]] std::vector<std::pair<std::uint64_t, std::uint64_t> >  get_white_bishop_moves() const noexcept;
+        [[nodiscard]] std::vector<std::pair<std::uint64_t, std::uint64_t> >  get_black_bishop_moves() const noexcept;
 };
 
 #endif
