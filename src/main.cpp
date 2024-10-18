@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 
-int main(int argc, char* const argv[])
+int main(const int argc, const char* const argv[])
 {
     if (argc > 2) {
         std::cerr << "Too many arguments!\n\n";

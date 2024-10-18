@@ -11,11 +11,6 @@
 namespace Engine
 {
 
-[[nodiscard]] constexpr std::uint64_t get_bishop_moves(const std::uint64_t bitboard)
-{
-
-}
-
 static inline void game_mode()
 {
     const std::optional<const bool> player_is_white = UI::get_player_color();
