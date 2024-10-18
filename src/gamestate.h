@@ -4,7 +4,6 @@
 #define GAMESTATE_H
 
 #include <cstdint>
-#include <vector>
 #include "table.h"
 #include "util.h"
 
@@ -12,10 +11,10 @@ struct Gamestate
 {
         // @Desc: Default constructor for gamestate that initializes each piece to their proper position, as well as castling.
         constexpr Gamestate() noexcept : 
-            white_can_castle_kingside(false),
-            white_can_castle_queenside(false),
-            black_can_castle_kingside(false),
-            black_can_castle_queenside(false),
+            white_can_castle_kingside(true),
+            white_can_castle_queenside(true),
+            black_can_castle_kingside(true),
+            black_can_castle_queenside(true),
             white_to_move(true),
             white_pawns(0x000000000000FF00ULL),
             white_rooks(0x0000000000000081ULL),
@@ -83,6 +82,8 @@ struct Gamestate
             return get_white_pieces() | get_black_pieces();
         }
 
+        // @Return: A bitboard of all white pawn moves 
+
         [[nodiscard]] inline constexpr std::uint64_t get_white_pawn_moves() const noexcept
         {
             std::uint64_t current_bitboard = white_pawns;
@@ -100,6 +101,8 @@ struct Gamestate
             return moves;
         }
 
+        // @Return: A bitboard of all black pawn moves 
+    
         [[nodiscard]] inline constexpr std::uint64_t get_black_pawn_moves() const noexcept
         {
             std::uint64_t current_bitboard = black_pawns;
@@ -116,9 +119,6 @@ struct Gamestate
             
             return moves;
         }
-
-        [[nodiscard]] std::vector<std::pair<std::uint64_t, std::uint64_t> > get_white_knight_moves() const noexcept;
-        [[nodiscard]] std::vector<std::pair<std::uint64_t, std::uint64_t> > get_black_knight_moves() const noexcept;
 };
 
 #endif
