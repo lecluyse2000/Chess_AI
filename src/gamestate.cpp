@@ -18,7 +18,7 @@ std::vector<std::pair<std::uint64_t, std::uint64_t> > Gamestate::get_white_knigh
 }
 
 [[nodiscard]]
-std::vector<std::pair<std::uint64_t, std::uint64_t> > Gamestate:: get_black_knight_moves() const noexcept
+std::vector<std::pair<std::uint64_t, std::uint64_t> > Gamestate::get_black_knight_moves() const noexcept
 {
     std::vector<std::pair<std::uint64_t, std::uint64_t> > moves;
     std::uint64_t current_bitboard = black_knights; 

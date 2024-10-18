@@ -61,10 +61,24 @@ namespace Table
     return attack_array;
 }
 
+[[nodiscard]] static consteval std::array<std::uint64_t, 64> generate_king_moves()
+{
+    std::array<std::uint64_t, 64> king_moves;
+    for (int i = 0; i < 64; ++i) {
+        king_moves[i] = (Util::shift_left(1ULL << i) >> 8) | (Util::shift_right(1ULL << i) >> 8);
+        king_moves[i] |= (Util::shift_left(1ULL << i) << 8) | (Util::shift_right(1ULL << i) << 8);
+        king_moves[i] |= Util::shift_left(1ULL << i) | Util::shift_right(1ULL << i);
+        king_moves[i] |= Util::shift_up(1ULL << i) | Util::shift_up(1ULL << i);
+    }
+
+    return king_moves;
+}
+
 // These will be generated at compile time
+inline constexpr auto knight_table = generate_knight_lookup_table();
 inline constexpr auto white_pawn_attacks = generate_white_pawn_attacks();
 inline constexpr auto black_pawn_attacks = generate_black_pawn_attacks();
-inline constexpr auto knight_table = generate_knight_lookup_table();
+inline constexpr auto king_table = generate_king_moves();
 
 } // namespace Table
 
