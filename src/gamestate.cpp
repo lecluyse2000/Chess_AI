@@ -377,7 +377,7 @@ std::vector<std::pair<std::uint64_t, std::uint64_t> > Gamestate::get_black_rook_
     return moves;
 }
 
-[[nodiscard]] std::vector<std::pair<std::uint64_t, std::uint64_t> >  Gamestate::get_white_queen_moves() const noexcept
+[[nodiscard]] std::vector<std::pair<std::uint64_t, std::uint64_t> > Gamestate::get_white_queen_moves() const noexcept
 {
     std::vector<std::pair<std::uint64_t, std::uint64_t> > moves;
     std::uint64_t current_bitboard = white_queen;
@@ -393,7 +393,7 @@ std::vector<std::pair<std::uint64_t, std::uint64_t> > Gamestate::get_black_rook_
     return moves;
 }
 
-[[nodiscard]] std::vector<std::pair<std::uint64_t, std::uint64_t> >  Gamestate::get_black_queen_moves() const noexcept
+[[nodiscard]] std::vector<std::pair<std::uint64_t, std::uint64_t> > Gamestate::get_black_queen_moves() const noexcept
 {
     std::vector<std::pair<std::uint64_t, std::uint64_t> > moves;
     std::uint64_t current_bitboard = white_queen;

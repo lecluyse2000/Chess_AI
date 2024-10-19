@@ -57,7 +57,7 @@ inline constexpr std::uint64_t get_least_sig_bit(const std::uint64_t bitboard)
 // @Return: A bitboard with the least signficant bit cleared.
 
 [[nodiscard]]
-inline constexpr std::uint64_t clear_least_sig_bit(std::uint64_t bitboard)
+inline constexpr std::uint64_t clear_least_sig_bit(const std::uint64_t bitboard)
 {
     return bitboard & (bitboard - 1);
 }

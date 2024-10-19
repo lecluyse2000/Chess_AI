@@ -3,10 +3,13 @@
 #ifndef ENGINE_H
 #define ENGINE_H
 
+#include "gamestate.h"
+
 namespace Engine
 {
 
-[[nodiscard]] int run(const bool analysis_mode);
+void make_random_move_white(Gamestate& current_gamestate);
+void make_random_move_black(Gamestate& current_gamestate);
 
 }
 

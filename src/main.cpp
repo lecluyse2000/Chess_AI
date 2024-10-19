@@ -1,6 +1,6 @@
 //Author: Caden LeCluyse
 
-#include "engine.h"
+#include "game.h"
 #include <iostream>
 #include <string>
 
@@ -11,13 +11,13 @@ int main(const int argc, const char* const argv[])
         return 1;
     } else if (argc == 2) {
         const std::string input = argv[1];
-        if (input != "--analysis" && input != "-a") {
+        if (input != "--game" && input != "-g") {
             std::cerr << "Invalid flag!\n\n";
             return 1;
         }
 
-        return Engine::run(true);
+        return Game::start_game_mode();
     }
 
-    return Engine::run(false);
+    return 1;
 }

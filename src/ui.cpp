@@ -29,7 +29,7 @@ namespace UI
         }
 
         if (!std::getline(std::cin, player_color)) [[unlikely]] {
-            std::cerr << "An error has occurred!\n\n"; 
+            std::cerr << "An error has occurred while getting player color!\n\n"; 
             return std::nullopt;
         }
     }
