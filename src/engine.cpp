@@ -3,7 +3,10 @@
 #include "engine.h"
 
 #include "gamestate.h"
+#include "util.h"
 
+#include <cassert>
+#include <cstdint>
 #include <utility>
 #include <vector>
 
@@ -414,6 +417,42 @@ std::vector<std::pair<std::uint64_t, std::uint64_t> > get_black_rook_moves(const
     }
 
     return moves;
+}
+
+void castle_kingside_white(Gamestate& gamestate)
+{
+    assert(gamestate.white_can_castle_kingside);
+    assert(gamestate.white_rooks & (1ULL << 7));
+    gamestate.white_king = gamestate.white_king << 2;
+    gamestate.white_rooks &= ~(1ULL << 7);
+    gamestate.white_rooks |= (1ULL << 5);
+}
+
+void castle_queenside_white(Gamestate& gamestate)
+{
+    assert(gamestate.white_can_castle_queenside);
+    assert(gamestate.white_rooks & 1ULL);
+    gamestate.white_king = gamestate.white_king >> 2;
+    gamestate.white_rooks &= ~1ULL;
+    gamestate.white_rooks |= (1ULL >> 3);
+}
+
+void castle_kingside_black(Gamestate& gamestate)
+{
+    assert(gamestate.black_can_castle_kingside);
+    assert(gamestate.black_rooks & (1ULL << 63));
+    gamestate.black_king = gamestate.black_king << 2;
+    gamestate.black_rooks &= ~(1ULL << 63);
+    gamestate.black_rooks |= (1ULL << 61);
+}
+
+void castle_queenside_black(Gamestate& gamestate)
+{
+    assert(gamestate.black_can_castle_queenside);
+    assert(gamestate.black_rooks & (1ULL << 56));
+    gamestate.black_king = gamestate.black_king >> 2;
+    gamestate.black_rooks &= ~(1ULL << 56);
+    gamestate.black_rooks |= (1ULL << 59);
 }
 
 [[nodiscard]] bool game_is_over(const Gamestate& current_gamestate)
