@@ -7,6 +7,8 @@
 #include "table.h"
 #include "util.h"
 
+using u64 = std::uint64_t;
+
 struct Gamestate
 {
         // @Desc: Default constructor for gamestate that initializes each piece to their proper position, as well as castling.
@@ -36,24 +38,24 @@ struct Gamestate
         bool black_can_castle_queenside;
         bool white_to_move;
 
-        std::uint64_t white_pawns;
-        std::uint64_t white_rooks;
-        std::uint64_t white_knights;
-        std::uint64_t white_bishops;
-        std::uint64_t white_queen;
-        std::uint64_t white_king;
+        u64 white_pawns;
+        u64 white_rooks;
+        u64 white_knights;
+        u64 white_bishops;
+        u64 white_queen;
+        u64 white_king;
 
-        std::uint64_t black_pawns;
-        std::uint64_t black_rooks;
-        std::uint64_t black_knights;
-        std::uint64_t black_bishops;
-        std::uint64_t black_queen;
-        std::uint64_t black_king;
+        u64 black_pawns;
+        u64 black_rooks;
+        u64 black_knights;
+        u64 black_bishops;
+        u64 black_queen;
+        u64 black_king;
 
 
         // @Return: A bitboard of all white pieces
 
-        [[nodiscard]] inline constexpr std::uint64_t get_white_pieces() const noexcept
+        [[nodiscard]] inline constexpr u64 get_white_pieces() const noexcept
         {
             return white_king |
                    white_queen |
@@ -65,7 +67,7 @@ struct Gamestate
 
         // @Return: A bitboard of all black pieces
 
-        [[nodiscard]] inline constexpr std::uint64_t get_black_pieces() const noexcept
+        [[nodiscard]] inline constexpr u64 get_black_pieces() const noexcept
         {
             return black_king |
                    black_queen |
@@ -77,20 +79,20 @@ struct Gamestate
 
         // @Return: A bitboard of all pieces
 
-        [[nodiscard]] inline constexpr std::uint64_t get_all_pieces() const noexcept
+        [[nodiscard]] inline constexpr u64 get_all_pieces() const noexcept
         {
             return get_white_pieces() | get_black_pieces();
         }
 
         // @Return: A bitboard of all white pawn moves 
 
-        [[nodiscard]] inline constexpr std::uint64_t get_white_pawn_moves() const noexcept
+        [[nodiscard]] inline constexpr u64 get_white_pawn_moves() const noexcept
         {
-            std::uint64_t current_bitboard = white_pawns;
-            std::uint64_t moves = 0;
+            u64 current_bitboard = white_pawns;
+            u64 moves = 0;
             
             while (current_bitboard) {
-                const std::uint64_t current_bit = Util::get_least_sig_bit(current_bitboard);
+                const u64 current_bit = Util::get_least_sig_bit(current_bitboard);
                 moves |= Table::white_pawn_attacks[current_bit] & get_black_pieces();
                 moves |= (current_bit & Types::rank_2) ? (current_bit << 8 | current_bit << 16) & ~get_all_pieces()
                                                        : (current_bit << 8) & ~get_all_pieces();
@@ -103,13 +105,13 @@ struct Gamestate
 
         // @Return: A bitboard of all black pawn moves 
     
-        [[nodiscard]] inline constexpr std::uint64_t get_black_pawn_moves() const noexcept
+        [[nodiscard]] inline constexpr u64 get_black_pawn_moves() const noexcept
         {
-            std::uint64_t current_bitboard = black_pawns;
-            std::uint64_t moves = 0;
+            u64 current_bitboard = black_pawns;
+            u64 moves = 0;
             
             while (current_bitboard) {
-                const std::uint64_t current_bit = Util::get_least_sig_bit(current_bitboard);
+                const u64 current_bit = Util::get_least_sig_bit(current_bitboard);
                 moves |= Table::black_pawn_attacks[current_bit] & get_white_pieces();
                 moves |= (current_bit & Types::rank_7) ? (current_bit >> 8 | current_bit >> 16) & ~get_all_pieces()
                                                        : (current_bit >> 8) & ~get_all_pieces();

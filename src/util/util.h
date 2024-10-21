@@ -4,6 +4,9 @@
 #define UTIL_H
 
 #include "types.h"
+#include <cstdint>
+
+using u64 = std::uint64_t;
 
 namespace Util
 {
@@ -12,7 +15,7 @@ namespace Util
 // @Return: The bitboard shifted left eight bits.
 
 [[nodiscard]]
-inline constexpr std::uint64_t shift_up(const std::uint64_t current_position)
+inline constexpr u64 shift_up(const u64 current_position)
 {
     return current_position << 8;
 }
@@ -21,7 +24,7 @@ inline constexpr std::uint64_t shift_up(const std::uint64_t current_position)
 // @Return: The bitboard shifted right eight bits.
 
 [[nodiscard]]
-inline constexpr std::uint64_t shift_down(const std::uint64_t current_position)
+inline constexpr u64 shift_down(const u64 current_position)
 {
     return current_position >> 8;
 }
@@ -30,7 +33,7 @@ inline constexpr std::uint64_t shift_down(const std::uint64_t current_position)
 // @Return: If the file is h, return 0. Otherwise return the posititon shifted right one bit.
 
 [[nodiscard]]
-inline constexpr std::uint64_t shift_right(const std::uint64_t current_position)
+inline constexpr u64 shift_right(const u64 current_position)
 {
     return (current_position & ~Types::file_h) << 1;
 }
@@ -39,7 +42,7 @@ inline constexpr std::uint64_t shift_right(const std::uint64_t current_position)
 // @Return: If the file is h, return 0. Otherwise return the posititon shifted left one bit.
 
 [[nodiscard]]
-inline constexpr std::uint64_t shift_left(const std::uint64_t current_position)
+inline constexpr u64 shift_left(const u64 current_position)
 {
     return (current_position & ~Types::file_a) >> 1;
 }
@@ -48,7 +51,7 @@ inline constexpr std::uint64_t shift_left(const std::uint64_t current_position)
 // @Return: The least significant bit of a given bitboard. 
 
 [[nodiscard]]
-inline constexpr std::uint64_t get_least_sig_bit(const std::uint64_t bitboard)
+inline constexpr u64 get_least_sig_bit(const u64 bitboard)
 {
     return bitboard & -bitboard;
 }
@@ -57,7 +60,7 @@ inline constexpr std::uint64_t get_least_sig_bit(const std::uint64_t bitboard)
 // @Return: A bitboard with the least signficant bit cleared.
 
 [[nodiscard]]
-inline constexpr std::uint64_t clear_least_sig_bit(const std::uint64_t bitboard)
+inline constexpr u64 clear_least_sig_bit(const u64 bitboard)
 {
     return bitboard & (bitboard - 1);
 }

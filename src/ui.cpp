@@ -9,6 +9,8 @@
 #include <string_view>
 #include "util/types.h"
 
+using u64 = std::uint64_t;
+
 namespace UI
 {
 
@@ -60,7 +62,7 @@ namespace UI
 }
 
 [[nodiscard]] static
-constexpr std::optional<std::pair<Types::Piece, std::uint64_t> > parse_input(const std::string_view input_expression)
+constexpr std::optional<std::pair<Types::Piece, u64> > parse_input(const std::string_view input_expression)
 {
     if (input_expression.length() > 12) {
         std::cerr << "The input is too long!\n\n";
@@ -73,7 +75,7 @@ constexpr std::optional<std::pair<Types::Piece, std::uint64_t> > parse_input(con
     }
 }
 
-[[nodiscard]] std::optional<std::pair<Types::Piece, std::uint64_t> > get_player_move(const auto& current_moves)
+[[nodiscard]] std::optional<std::pair<Types::Piece, u64> > get_player_move(const auto& current_moves)
 {
     std::string input_expression;
 
