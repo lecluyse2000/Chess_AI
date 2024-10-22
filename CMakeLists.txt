@@ -18,7 +18,8 @@ if (NOT DEFINED CMAKE_CXX_STANDARD)
 endif()
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_EXPORT_COMPILE_COMMANDS $<$<CONFIG:Debug>:ON>)
+set(CMAKE_EXPORT_COMPILE_COMMANDS $<$<CONFIG:Release>:OFF>
+                                  $<$<CONFIG:Debug>:ON>)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_executable(chess_ai)
@@ -49,8 +50,5 @@ else()
         $<$<CONFIG:Release>:-O2>
     )
 endif()
-
-target_compile_definitions(chess_ai PRIVATE 
-)
 
 #Use this command to build on Linux: cmake -B build && make -C build

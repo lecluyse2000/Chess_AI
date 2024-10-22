@@ -31,7 +31,7 @@ namespace Table
 [[nodiscard]] static consteval std::array<u64, 64> generate_knight_lookup_table()
 {
     std::array<u64, 64> table;
-    for (int i = 0; i < 64; ++i) {
+    for (std::size_t i = 0; i < 64; ++i) {
         table[i] = get_knight_moves(1ULL << i); 
     }
 
@@ -44,7 +44,7 @@ namespace Table
 [[nodiscard]] static consteval std::array<u64, 64> generate_white_pawn_attacks()
 {
     std::array<u64, 64> attack_array;
-    for (int i = 0; i < 64; ++i) {
+    for (std::size_t i = 0; i < 64; ++i) {
         attack_array[i] = (Util::shift_left(1ULL << i) << 8) | (Util::shift_right(1ULL << i) << 8);
     }
 
@@ -57,7 +57,7 @@ namespace Table
 [[nodiscard]] static consteval std::array<u64, 64> generate_black_pawn_attacks()
 {
     std::array<u64, 64> attack_array;
-    for (int i = 0; i < 64; ++i) {
+    for (std::size_t i = 0; i < 64; ++i) {
         attack_array[i] = (Util::shift_left(1ULL << i) >> 8) | (Util::shift_right(1ULL << i) >> 8);
     }
 
@@ -70,7 +70,7 @@ namespace Table
 [[nodiscard]] static consteval std::array<u64, 64> generate_king_lookup_table()
 {
     std::array<u64, 64> king_moves;
-    for (int i = 0; i < 64; ++i) {
+    for (std::size_t i = 0; i < 64; ++i) {
         king_moves[i] = (Util::shift_left(1ULL << i) >> 8) | (Util::shift_right(1ULL << i) >> 8);
         king_moves[i] |= (Util::shift_left(1ULL << i) << 8) | (Util::shift_right(1ULL << i) << 8);
         king_moves[i] |= Util::shift_left(1ULL << i) | Util::shift_right(1ULL << i);
