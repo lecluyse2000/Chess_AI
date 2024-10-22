@@ -3,7 +3,7 @@
 #include "engine.h"
 
 #include "gamestate.h"
-#include "util.h"
+#include "util/util.h"
 
 #include <cassert>
 #include <cstdint>

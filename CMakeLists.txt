@@ -18,8 +18,7 @@ if (NOT DEFINED CMAKE_CXX_STANDARD)
 endif()
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_EXPORT_COMPILE_COMMANDS $<$<CONFIG:Release>:OFF>
-                                  $<$<CONFIG:Debug>:ON>)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_executable(chess_ai)
@@ -41,14 +40,16 @@ target_compile_definitions(chess_ai PRIVATE CURRENT_VERSION="${CMAKE_PROJECT_VER
 
 if (MSVC)
     target_compile_options(chess_ai PRIVATE 
-        $<$<CONFIG:Debug>:/W4>
+        /W4
         $<$<CONFIG:Release>:/O2>
     )
 else()
     target_compile_options(chess_ai PRIVATE 
-        $<$<CONFIG:Debug>:-g -Wall -Wextra -Wshadow -Wconversion -Wpedantic>
+        $<$<CONFIG:Debug>:-g>
         $<$<CONFIG:Release>:-O2>
+        -Wall -Wextra -Wshadow -Wconversion -Wpedantic
     )
 endif()
 
-#Use this command to build on Linux: cmake -B build && make -C build
+#Use this command to build on Linux: cmake -B build && cmake --build build 
+#On Windows not in IDE: cmake -B build -G Ninja && cmake --build build

@@ -4,7 +4,7 @@
 #define GAMESTATE_H
 
 #include <cstdint>
-#include "table.h"
+#include "util/table.h"
 #include "util.h"
 
 using u64 = std::uint64_t;
