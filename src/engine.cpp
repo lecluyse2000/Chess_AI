@@ -171,17 +171,15 @@ generate_black_bishop_moves(const u64 og_position, const u64 white_pieces, const
 // @Return: A vector of key entry pairs, where the key is the position and the entry are the moves
 
 [[nodiscard]] 
-std::vector<std::pair<u64, u64> > get_white_bishop_moves(const Gamestate& gamestate) noexcept
+std::vector<std::pair<u64, u64> > get_white_bishop_moves(Gamestate& gamestate) noexcept
 {
     std::vector<std::pair<u64, u64> > moves;
     u64 current_bitboard = gamestate.white_bishops;
 
     while (current_bitboard) {
         const u64 current_position = Util::get_least_sig_bit(current_bitboard);
-        moves.emplace_back(std::make_pair(current_position, 
-                                          generate_white_bishop_moves(current_position, 
-                                          gamestate.get_white_pieces(), gamestate.get_black_pieces())));
-
+        const u64 current_moves = generate_white_bishop_moves(current_position, gamestate.get_white_pieces(), gamestate.get_black_pieces());
+        moves.emplace_back(std::make_pair(current_position, current_moves));
         current_bitboard = Util::clear_least_sig_bit(current_bitboard);
     }
 
@@ -189,7 +187,7 @@ std::vector<std::pair<u64, u64> > get_white_bishop_moves(const Gamestate& gamest
 }
 
 [[nodiscard]] 
-std::vector<std::pair<u64, u64> > get_black_bishop_moves(const Gamestate& gamestate) noexcept
+std::vector<std::pair<u64, u64> > get_black_bishop_moves(Gamestate& gamestate) noexcept
 {
     std::vector<std::pair<u64, u64> > moves;
     u64 current_bitboard = gamestate.black_bishops;
@@ -354,7 +352,7 @@ generate_black_rook_moves(const u64 og_position, const u64 white_pieces, const u
 // @Return: A vector of key entry pairs, where the key is the position and the entry are the moves
 
 [[nodiscard]] 
-std::vector<std::pair<u64, u64> > get_white_rook_moves(const Gamestate& gamestate) noexcept
+std::vector<std::pair<u64, u64> > get_white_rook_moves(Gamestate& gamestate) noexcept
 {
     std::vector<std::pair<u64, u64> > moves;
     u64 current_bitboard = gamestate.white_rooks;
@@ -372,7 +370,7 @@ std::vector<std::pair<u64, u64> > get_white_rook_moves(const Gamestate& gamestat
 }
 
 [[nodiscard]] 
-std::vector<std::pair<u64, u64> > get_black_rook_moves(const Gamestate& gamestate) noexcept
+std::vector<std::pair<u64, u64> > get_black_rook_moves(Gamestate& gamestate) noexcept
 {
     std::vector<std::pair<u64, u64> > moves;
     u64 current_bitboard = gamestate.black_rooks;
@@ -389,7 +387,7 @@ std::vector<std::pair<u64, u64> > get_black_rook_moves(const Gamestate& gamestat
     return moves;
 }
 
-[[nodiscard]] std::vector<std::pair<u64, u64> > get_white_queen_moves(const Gamestate& gamestate) noexcept
+[[nodiscard]] std::vector<std::pair<u64, u64> > get_white_queen_moves(Gamestate& gamestate) noexcept
 {
     std::vector<std::pair<u64, u64> > moves;
     u64 current_bitboard = gamestate.white_queen;
@@ -405,7 +403,7 @@ std::vector<std::pair<u64, u64> > get_black_rook_moves(const Gamestate& gamestat
     return moves;
 }
 
-[[nodiscard]] std::vector<std::pair<u64, u64> > get_black_queen_moves(const Gamestate& gamestate) noexcept
+[[nodiscard]] std::vector<std::pair<u64, u64> > get_black_queen_moves(Gamestate& gamestate) noexcept
 {
     std::vector<std::pair<u64, u64> > moves;
     u64 current_bitboard = gamestate.white_queen;
@@ -457,7 +455,7 @@ void castle_queenside_black(Gamestate& gamestate)
     gamestate.black_rooks |= (1ULL << 59);
 }
 
-[[nodiscard]] bool game_is_over(const Gamestate& current_gamestate)
+[[nodiscard]] bool game_is_over(Gamestate& current_gamestate)
 {
     if (current_gamestate.white_to_move) {
 

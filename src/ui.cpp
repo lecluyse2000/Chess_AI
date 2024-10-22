@@ -17,7 +17,7 @@ namespace UI
 // @Desc: When playing in game mode, gets the current color for the player
 // @Return: An optional bool indicating if getting the input was successful, as well as the player color.
 
-[[nodiscard]] std::optional<const bool> get_player_color()
+[[nodiscard]] std::optional<bool> get_player_color()
 {
     std::string player_color;
 

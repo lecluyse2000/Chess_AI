@@ -12,7 +12,7 @@ using u64 = std::uint64_t;
 namespace UI
 {
 
-[[nodiscard]] std::optional<const bool> get_player_color();
+[[nodiscard]] std::optional<bool> get_player_color();
 [[nodiscard]] std::optional<std::pair<u64, u64> > get_player_move();
 
 }

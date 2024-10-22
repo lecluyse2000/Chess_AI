@@ -5,7 +5,7 @@
 
 #include <cstdint>
 #include "util/table.h"
-#include "util.h"
+#include "util/util.h"
 
 using u64 = std::uint64_t;
 
@@ -18,6 +18,7 @@ struct Gamestate
             black_can_castle_kingside(true),
             black_can_castle_queenside(true),
             white_to_move(true),
+            is_check(false),
             white_pawns(0x000000000000FF00ULL),
             white_rooks(0x0000000000000081ULL),
             white_knights(0x0000000000000042ULL),
@@ -37,6 +38,7 @@ struct Gamestate
         bool black_can_castle_kingside;
         bool black_can_castle_queenside;
         bool white_to_move;
+        bool is_check;
 
         u64 white_pawns;
         u64 white_rooks;
@@ -51,7 +53,6 @@ struct Gamestate
         u64 black_bishops;
         u64 black_queen;
         u64 black_king;
-
 
         // @Return: A bitboard of all white pieces
 

@@ -15,17 +15,17 @@ namespace Engine
 {
 
 [[nodiscard]] 
-std::vector<std::pair<u64, u64> > get_white_bishop_moves(const Gamestate& gamestate) noexcept;
+std::vector<std::pair<u64, u64> > get_white_bishop_moves(Gamestate& gamestate) noexcept;
 [[nodiscard]] 
-std::vector<std::pair<u64, u64> > get_black_bishop_moves(const Gamestate& gamestate) noexcept;
+std::vector<std::pair<u64, u64> > get_black_bishop_moves(Gamestate& gamestate) noexcept;
 [[nodiscard]] 
-std::vector<std::pair<u64, u64> > get_white_rook_moves(const Gamestate& gamestate) noexcept;
+std::vector<std::pair<u64, u64> > get_white_rook_moves(Gamestate& gamestate) noexcept;
 [[nodiscard]] 
-std::vector<std::pair<u64, u64> > get_black_rook_moves(const Gamestate& gamestate) noexcept;
+std::vector<std::pair<u64, u64> > get_black_rook_moves(Gamestate& gamestate) noexcept;
 [[nodiscard]] 
-std::vector<std::pair<u64, u64> > get_white_queen_moves(const Gamestate& gamestate) noexcept;
+std::vector<std::pair<u64, u64> > get_white_queen_moves(Gamestate& gamestate) noexcept;
 [[nodiscard]] 
-std::vector<std::pair<u64, u64> > get_black_queen_moves(const Gamestate& gamestate) noexcept;
+std::vector<std::pair<u64, u64> > get_black_queen_moves(Gamestate& gamestate) noexcept;
 
 void castle_kingside_white(Gamestate& gamestate);
 void castle_queenside_white(Gamestate& gamestate);
