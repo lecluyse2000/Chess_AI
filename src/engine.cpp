@@ -23,8 +23,8 @@ generate_white_bishop_moves(const u64 og_position, const u64 white_pieces, const
 
     for (int i = 1; i < 9; ++i) {
         const auto shift_right = Util::shift_right(position);
-        if (!shift_right) break;
         const auto diagonal_right = Util::shift_up(shift_right);
+        if (!diagonal_right) break;
 
         if (diagonal_right & white_pieces) break;
         else if (diagonal_right & black_pieces) {
@@ -39,8 +39,8 @@ generate_white_bishop_moves(const u64 og_position, const u64 white_pieces, const
     position = og_position;
     for (int i = 1; i < 9; ++i) {
         const auto shift_right = Util::shift_right(position);
-        if (!shift_right) break;
         const auto diagonal_right = Util::shift_down(shift_right);
+        if (!diagonal_right) break;
 
         if (diagonal_right & white_pieces) break;
         else if (diagonal_right & black_pieces) {
@@ -55,8 +55,8 @@ generate_white_bishop_moves(const u64 og_position, const u64 white_pieces, const
     position = og_position;
     for (int i = 1; i < 9; ++i) {
         const auto shift_left = Util::shift_left(position);
-        if (!shift_left) break;
         const auto diagonal_left = Util::shift_up(shift_left);
+        if (!diagonal_left) break;
 
         if (diagonal_left & white_pieces) break;
         else if (diagonal_left & black_pieces) {
@@ -71,8 +71,8 @@ generate_white_bishop_moves(const u64 og_position, const u64 white_pieces, const
     position = og_position;
     for (int i = 1; i < 9; ++i) {
         const auto shift_left = Util::shift_left(position);
-        if (!shift_left) break;
         const auto diagonal_left = Util::shift_down(shift_left);
+        if (!diagonal_left) break;
 
         if (diagonal_left & white_pieces) break;
         else if (diagonal_left & black_pieces) {
@@ -95,8 +95,8 @@ generate_black_bishop_moves(const u64 og_position, const u64 white_pieces, const
 
     for (int i = 1; i < 9; ++i) {
         const auto shift_right = Util::shift_right(position);
-        if (!shift_right) break;
         const auto diagonal_right = Util::shift_up(shift_right);
+        if (!diagonal_right) break;
 
         if (diagonal_right & white_pieces) {
             moves |= diagonal_right;
@@ -113,8 +113,8 @@ generate_black_bishop_moves(const u64 og_position, const u64 white_pieces, const
     position = og_position;
     for (int i = 1; i < 9; ++i) {
         const auto shift_right = Util::shift_right(position);
-        if (!shift_right) break;
         const auto diagonal_right = Util::shift_down(shift_right);
+        if (!diagonal_right) break;
 
         if (diagonal_right & white_pieces) {
             moves |= diagonal_right;
@@ -131,8 +131,8 @@ generate_black_bishop_moves(const u64 og_position, const u64 white_pieces, const
     position = og_position;
     for (int i = 1; i < 9; ++i) {
         const auto shift_left = Util::shift_left(position);
-        if (!shift_left) break;
         const auto diagonal_left = Util::shift_up(shift_left);
+        if (!diagonal_left) break;
 
         if (diagonal_left & white_pieces) { 
             moves |= diagonal_left;
@@ -149,8 +149,8 @@ generate_black_bishop_moves(const u64 og_position, const u64 white_pieces, const
     position = og_position;
     for (int i = 1; i < 9; ++i) {
         const auto shift_left = Util::shift_left(position);
-        if (!shift_left) break;
         const auto diagonal_left = Util::shift_down(shift_left);
+        if (!diagonal_left) break;
 
         if (diagonal_left & white_pieces) { 
             moves |= diagonal_left;
@@ -459,17 +459,11 @@ void castle_queenside_black(Gamestate& gamestate)
 
 [[nodiscard]] bool game_is_over(const Gamestate& current_gamestate)
 {
+    if (current_gamestate.white_to_move) {
 
-}
+    } else {
 
-void make_random_move_white(Gamestate& current_gamestate)
-{
-
-}
-
-void make_random_move_black(Gamestate& current_gamestate)
-{
-
+    }
 }
 
 } // namespace Engine

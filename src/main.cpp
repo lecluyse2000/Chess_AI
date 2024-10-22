@@ -11,12 +11,15 @@ int main(const int argc, const char* const argv[])
         return 1;
     } else if (argc == 2) {
         const std::string input = argv[1];
-        if (input != "--game" && input != "-g") {
-            std::cerr << "Invalid flag!\n\n";
-            return 1;
+        if (input == "--game" || input == "-g") {
+            return Game::start_game_mode();
+        } else if (input == "--version" || input == "-v") {
+            std::cout << "Chess Engine v" << CURRENT_VERSION << std::endl;
+            return 0;
         }
+        std::cerr << "Invalid flag!\n\n";
+        return 1;
 
-        return Game::start_game_mode();
     }
 
     return 1;
