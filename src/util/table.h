@@ -45,7 +45,7 @@ namespace Table
 {
     std::array<u64, 64> attack_array;
     for (std::size_t i = 0; i < 64; ++i) {
-        attack_array[i] = (Util::shift_left(1ULL << i) << 8) | (Util::shift_right(1ULL << i) << 8);
+        attack_array[i] = (Util::shift_left(1ULL << i) | Util::shift_right(1ULL << i)) << 8;
     }
 
     return attack_array;
@@ -58,7 +58,7 @@ namespace Table
 {
     std::array<u64, 64> attack_array;
     for (std::size_t i = 0; i < 64; ++i) {
-        attack_array[i] = (Util::shift_left(1ULL << i) >> 8) | (Util::shift_right(1ULL << i) >> 8);
+        attack_array[i] = (Util::shift_left(1ULL << i) | Util::shift_right(1ULL << i)) >> 8;
     }
 
     return attack_array;
@@ -71,10 +71,10 @@ namespace Table
 {
     std::array<u64, 64> king_moves;
     for (std::size_t i = 0; i < 64; ++i) {
-        king_moves[i] = (Util::shift_left(1ULL << i) >> 8) | (Util::shift_right(1ULL << i) >> 8);
-        king_moves[i] |= (Util::shift_left(1ULL << i) << 8) | (Util::shift_right(1ULL << i) << 8);
+        king_moves[i] = (Util::shift_left(1ULL << i) | Util::shift_right(1ULL << i)) >> 8;
+        king_moves[i] |= (Util::shift_left(1ULL << i) | Util::shift_right(1ULL << i)) << 8;
         king_moves[i] |= Util::shift_left(1ULL << i) | Util::shift_right(1ULL << i);
-        king_moves[i] |= Util::shift_up(1ULL << i) | Util::shift_up(1ULL << i);
+        king_moves[i] |= Util::shift_up(1ULL << i) | Util::shift_down(1ULL << i);
     }
 
     return king_moves;

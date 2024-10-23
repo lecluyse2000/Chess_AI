@@ -11,7 +11,7 @@ using u64 = std::uint64_t;
 namespace Movegen
 {
 
-[[nodiscard]] static u64 
+[[nodiscard]]  u64 
 generate_white_bishop_moves(const u64 og_position, const u64 white_pieces, const u64 black_pieces)
 {
     u64 position = og_position;
@@ -83,7 +83,7 @@ generate_white_bishop_moves(const u64 og_position, const u64 white_pieces, const
     return moves;
 }
 
-[[nodiscard]] static u64 
+[[nodiscard]]  u64 
 generate_black_bishop_moves(const u64 og_position, const u64 white_pieces, const u64 black_pieces)
 {
     u64 position = og_position;
@@ -200,7 +200,7 @@ std::vector<std::pair<u64, u64> > get_black_bishop_moves(Gamestate& gamestate) n
     return moves;
 }
 
-[[nodiscard]] static u64 
+[[nodiscard]]  u64 
 generate_white_rook_moves(const u64 og_position, const u64 white_pieces, const u64 black_pieces)
 {
     u64 position = og_position;
@@ -268,7 +268,7 @@ generate_white_rook_moves(const u64 og_position, const u64 white_pieces, const u
     return moves;
 }
 
-[[nodiscard]] static u64 
+[[nodiscard]]  u64 
 generate_black_rook_moves(const u64 og_position, const u64 white_pieces, const u64 black_pieces)
 {
     u64 position = og_position;
