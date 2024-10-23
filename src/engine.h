@@ -6,31 +6,26 @@
 #include "gamestate.h"
 
 #include <cstdint>
-#include <utility>
-#include <vector>
 
 using u64 = std::uint64_t;
 
 namespace Engine
 {
 
-[[nodiscard]] 
-std::vector<std::pair<u64, u64> > get_white_bishop_moves(Gamestate& gamestate) noexcept;
-[[nodiscard]] 
-std::vector<std::pair<u64, u64> > get_black_bishop_moves(Gamestate& gamestate) noexcept;
-[[nodiscard]] 
-std::vector<std::pair<u64, u64> > get_white_rook_moves(Gamestate& gamestate) noexcept;
-[[nodiscard]] 
-std::vector<std::pair<u64, u64> > get_black_rook_moves(Gamestate& gamestate) noexcept;
-[[nodiscard]] 
-std::vector<std::pair<u64, u64> > get_white_queen_moves(Gamestate& gamestate) noexcept;
-[[nodiscard]] 
-std::vector<std::pair<u64, u64> > get_black_queen_moves(Gamestate& gamestate) noexcept;
-
 void castle_kingside_white(Gamestate& gamestate);
 void castle_queenside_white(Gamestate& gamestate);
 void castle_kingside_black(Gamestate& gamestate);
 void castle_queenside_black(Gamestate& gamestate);
+void make_white_pawn_move(Gamestate& gamestate, const u64 og_position, const u64 new_position) noexcept;
+void make_white_knight_move(Gamestate& gamestate, const u64 og_position, const u64 new_position) noexcept;
+void make_white_bishop_move(Gamestate& gamestate, const u64 og_position, const u64 new_position) noexcept;
+void make_white_rook_move(Gamestate& gamestate, const u64 og_position, const u64 new_position) noexcept;
+void make_white_queen_move(Gamestate& gamestate, const u64 og_position, const u64 new_position) noexcept;
+void make_black_pawn_move(Gamestate& gamestate, const u64 og_position, const u64 new_position) noexcept;
+void make_black_knight_move(Gamestate& gamestate, const u64 og_position, const u64 new_position) noexcept;
+void make_black_bishop_move(Gamestate& gamestate, const u64 og_position, const u64 new_position) noexcept;
+void make_black_rook_move(Gamestate& gamestate, const u64 og_position, const u64 new_position) noexcept;
+void make_black_queen_move(Gamestate& gamestate, const u64 og_position, const u64 new_position) noexcept;
 
 [[nodiscard]] bool game_is_over(const Gamestate& current_gamestate);
 void make_random_move_white(Gamestate& current_gamestate);
