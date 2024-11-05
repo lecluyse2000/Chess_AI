@@ -5,6 +5,7 @@
 
 #include <cstdint>
 #include "util/table.h"
+#include "util/types.h"
 #include "util/util.h"
 
 using u64 = std::uint64_t;
@@ -19,18 +20,19 @@ struct Gamestate
             black_can_castle_queenside(true),
             white_to_move(true),
             is_check(false),
-            white_pawns(0x000000000000FF00ULL),
-            white_rooks(0x0000000000000081ULL), 
-            white_knights(0x0000000000000042ULL),
-            white_bishops(0x0000000000000024ULL),
-            white_queen(0x0000000000000010ULL),
-            white_king(0x0000000000000008ULL),
-            black_pawns(0x00FF000000000000ULL),
-            black_rooks(0x8100000000000000ULL),
-            black_knights(0x4200000000000000ULL),
-            black_bishops(0x2400000000000000ULL),
-            black_queen(0x0800000000000000ULL),
-            black_king(0x1000000000000000ULL)
+            en_passant(false),
+            white_pawns(Types::Start::white_pawns_start),
+            white_rooks(Types::Start::white_rooks_start), 
+            white_knights(Types::Start::white_knights_start),
+            white_bishops(Types::Start::white_bishops_start),
+            white_queen(Types::Start::white_queen_start),
+            white_king(Types::Start::white_king_start),
+            black_pawns(Types::Start::black_pawns_start),
+            black_rooks(Types::Start::black_rooks_start),
+            black_knights(Types::Start::black_knights_start),
+            black_bishops(Types::Start::black_bishops_start),
+            black_queen(Types::Start::black_queen_start),
+            black_king(Types::Start::black_king_start)
         {}
 
         bool white_can_castle_kingside;
@@ -39,6 +41,7 @@ struct Gamestate
         bool black_can_castle_queenside;
         bool white_to_move;
         bool is_check;
+        bool en_passant;
 
         u64 white_pawns;
         u64 white_rooks;

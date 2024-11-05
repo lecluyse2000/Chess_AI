@@ -32,6 +32,24 @@ inline constexpr u64 main_diagonal = 0x8040201008040201ULL;
 inline constexpr u64 light_squares = 0x55AA55AA55AA55AAULL;
 inline constexpr u64 dark_squares = 0xAA55AA55AA55AA55ULL;
 
+namespace Start
+{
+
+inline constexpr u64 white_pawns_start = 0x000000000000FF00ULL;
+inline constexpr u64 white_rooks_start = 0x0000000000000081ULL;
+inline constexpr u64 white_knights_start = 0x0000000000000042ULL;
+inline constexpr u64 white_bishops_start = 0x0000000000000024ULL;
+inline constexpr u64 white_queen_start = 0x0000000000000010ULL;
+inline constexpr u64 white_king_start = 0x0000000000000008ULL;
+inline constexpr u64 black_pawns_start = 0x00FF000000000000ULL;
+inline constexpr u64 black_rooks_start = 0x8100000000000000ULL;
+inline constexpr u64 black_knights_start = 0x4200000000000000ULL;
+inline constexpr u64 black_bishops_start = 0x2400000000000000ULL;
+inline constexpr u64 black_queen_start = 0x0800000000000000ULL;
+inline constexpr u64 black_king_start = 0x1000000000000000ULL;
+
+}
+
 enum Piece
 {
 

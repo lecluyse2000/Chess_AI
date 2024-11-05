@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "gamestate.h"
+#include "table.h"
 
 using u64 = std::uint64_t;
 
@@ -12,7 +13,7 @@ namespace Movegen
 {
 
 [[nodiscard]]  u64 
-generate_white_bishop_moves(const u64 og_position, const u64 white_pieces, const u64 black_pieces)
+generate_white_bishop_moves(const u64 og_position, const u64 white_pieces, const u64 black_pieces) noexcept
 {
     u64 position = og_position;
     u64 moves = 0;
@@ -84,7 +85,7 @@ generate_white_bishop_moves(const u64 og_position, const u64 white_pieces, const
 }
 
 [[nodiscard]]  u64 
-generate_black_bishop_moves(const u64 og_position, const u64 white_pieces, const u64 black_pieces)
+generate_black_bishop_moves(const u64 og_position, const u64 white_pieces, const u64 black_pieces) noexcept
 {
     u64 position = og_position;
     u64 moves = 0;
@@ -167,7 +168,7 @@ generate_black_bishop_moves(const u64 og_position, const u64 white_pieces, const
 // @Return: A vector of key entry pairs, where the key is the position and the entry are the moves
 
 [[nodiscard]] 
-std::vector<std::pair<u64, u64> > get_white_bishop_moves(Gamestate& gamestate) noexcept
+std::vector<std::pair<u64, u64> > get_white_bishop_moves(const Gamestate& gamestate) noexcept
 {
     std::vector<std::pair<u64, u64> > moves;
     u64 current_bitboard = gamestate.white_bishops;
@@ -183,7 +184,7 @@ std::vector<std::pair<u64, u64> > get_white_bishop_moves(Gamestate& gamestate) n
 }
 
 [[nodiscard]] 
-std::vector<std::pair<u64, u64> > get_black_bishop_moves(Gamestate& gamestate) noexcept
+std::vector<std::pair<u64, u64> > get_black_bishop_moves(const Gamestate& gamestate) noexcept
 {
     std::vector<std::pair<u64, u64> > moves;
     u64 current_bitboard = gamestate.black_bishops;
@@ -201,7 +202,7 @@ std::vector<std::pair<u64, u64> > get_black_bishop_moves(Gamestate& gamestate) n
 }
 
 [[nodiscard]]  u64 
-generate_white_rook_moves(const u64 og_position, const u64 white_pieces, const u64 black_pieces)
+generate_white_rook_moves(const u64 og_position, const u64 white_pieces, const u64 black_pieces) noexcept
 {
     u64 position = og_position;
     u64 moves = 0;
@@ -269,7 +270,7 @@ generate_white_rook_moves(const u64 og_position, const u64 white_pieces, const u
 }
 
 [[nodiscard]]  u64 
-generate_black_rook_moves(const u64 og_position, const u64 white_pieces, const u64 black_pieces)
+generate_black_rook_moves(const u64 og_position, const u64 white_pieces, const u64 black_pieces) noexcept
 {
     u64 position = og_position;
     u64 moves = 0;
@@ -348,7 +349,7 @@ generate_black_rook_moves(const u64 og_position, const u64 white_pieces, const u
 // @Return: A vector of key entry pairs, where the key is the position and the entry are the moves
 
 [[nodiscard]] 
-std::vector<std::pair<u64, u64> > get_white_rook_moves(Gamestate& gamestate) noexcept
+std::vector<std::pair<u64, u64> > get_white_rook_moves(const Gamestate& gamestate) noexcept
 {
     std::vector<std::pair<u64, u64> > moves;
     u64 current_bitboard = gamestate.white_rooks;
@@ -366,7 +367,7 @@ std::vector<std::pair<u64, u64> > get_white_rook_moves(Gamestate& gamestate) noe
 }
 
 [[nodiscard]] 
-std::vector<std::pair<u64, u64> > get_black_rook_moves(Gamestate& gamestate) noexcept
+std::vector<std::pair<u64, u64> > get_black_rook_moves(const Gamestate& gamestate) noexcept
 {
     std::vector<std::pair<u64, u64> > moves;
     u64 current_bitboard = gamestate.black_rooks;
@@ -383,7 +384,7 @@ std::vector<std::pair<u64, u64> > get_black_rook_moves(Gamestate& gamestate) noe
     return moves;
 }
 
-[[nodiscard]] std::vector<std::pair<u64, u64> > get_white_queen_moves(Gamestate& gamestate) noexcept
+[[nodiscard]] std::vector<std::pair<u64, u64> > get_white_queen_moves(const Gamestate& gamestate) noexcept
 {
     std::vector<std::pair<u64, u64> > moves;
     u64 current_bitboard = gamestate.white_queen;
@@ -399,7 +400,7 @@ std::vector<std::pair<u64, u64> > get_black_rook_moves(Gamestate& gamestate) noe
     return moves;
 }
 
-[[nodiscard]] std::vector<std::pair<u64, u64> > get_black_queen_moves(Gamestate& gamestate) noexcept
+[[nodiscard]] std::vector<std::pair<u64, u64> > get_black_queen_moves(const Gamestate& gamestate) noexcept
 {
     std::vector<std::pair<u64, u64> > moves;
     u64 current_bitboard = gamestate.white_queen;
@@ -413,6 +414,44 @@ std::vector<std::pair<u64, u64> > get_black_rook_moves(Gamestate& gamestate) noe
     }
 
     return moves;
+}
+
+[[nodiscard]] static u64 get_white_knight_moves(u64 current_bitboard) noexcept
+{
+    u64 moves = 0;
+
+    while(current_bitboard) {
+        const u64 current_position = Util::get_least_sig_bit(current_bitboard);
+        moves |= Table::knight_table[current_position];
+        current_bitboard = Util::clear_least_sig_bit(current_bitboard);
+    }
+
+    return moves;
+}
+
+[[nodiscard]] u64 get_all_white_moves(const Gamestate& gamestate) noexcept
+{
+    const u64 pawn_moves = gamestate.get_white_pawn_moves();
+    const u64 knight_moves = get_white_knight_moves(gamestate.white_knights);
+    const auto bishop_moves = get_white_bishop_moves(gamestate);
+    const auto rook_moves = get_white_rook_moves(gamestate);
+    const auto queen_moves = get_white_queen_moves(gamestate);
+
+    u64 retval = 0;
+
+    retval |= Table::king_table[gamestate.white_king] & ~gamestate.get_all_pieces();
+    retval |= pawn_moves | knight_moves;
+    for (const auto& [pos, move] : bishop_moves) {
+        retval |= move;
+    }
+    for (const auto& [pos, move] : rook_moves) {
+        retval |= move;
+    }
+    for (const auto& [pos, move] : queen_moves) {
+        retval |= move;
+    }
+
+    return retval;
 }
 
 }

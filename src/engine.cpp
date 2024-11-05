@@ -24,10 +24,13 @@ void castle_kingside_white(Gamestate& gamestate)
     gamestate.white_rooks |= (1ULL << 5);
     gamestate.white_can_castle_kingside = false;
     gamestate.white_can_castle_queenside = false;
+
     if (Movegen::generate_white_rook_moves(1ULL << 5, gamestate.get_white_pieces(), gamestate.get_black_pieces()) &
-        gamestate.black_king) {
+        gamestate.black_king) [[unlikely]] { // A kingside castle is probably not going to give a check
+
         gamestate.is_check = true;
-    } else {
+
+    } else [[likely]] {
         gamestate.is_check = false;
     }
 }
@@ -41,9 +44,12 @@ void castle_queenside_white(Gamestate& gamestate)
     gamestate.white_rooks |= (1ULL << 3);
     gamestate.white_can_castle_kingside = false;
     gamestate.white_can_castle_queenside = false;
+
     if (Movegen::generate_white_rook_moves(1ULL << 3, gamestate.get_white_pieces(), gamestate.get_black_pieces()) &
         gamestate.black_king) {
+
         gamestate.is_check = true;
+
     } else {
         gamestate.is_check = false;
     }
@@ -58,10 +64,13 @@ void castle_kingside_black(Gamestate& gamestate)
     gamestate.black_rooks |= (1ULL << 61);
     gamestate.black_can_castle_kingside = false;
     gamestate.black_can_castle_queenside = false;
+
     if (Movegen::generate_white_rook_moves(1ULL << 61, gamestate.get_white_pieces(), gamestate.get_black_pieces()) &
-        gamestate.white_king) {
+        gamestate.white_king) [[unlikely]] {
+
         gamestate.is_check = true;
-    } else {
+
+    } else [[likely]] {
         gamestate.is_check = false;
     }
 }
@@ -75,9 +84,12 @@ void castle_queenside_black(Gamestate& gamestate)
     gamestate.black_rooks |= (1ULL << 59);
     gamestate.black_can_castle_kingside = false;
     gamestate.black_can_castle_queenside = false;
+
     if (Movegen::generate_white_rook_moves(1ULL << 59, gamestate.get_white_pieces(), gamestate.get_black_pieces()) &
         gamestate.white_king) {
+
         gamestate.is_check = true;
+        
     } else {
         gamestate.is_check = false;
     }
@@ -92,6 +104,9 @@ void make_white_pawn_move(Gamestate& gamestate, const u64 og_position, const u64
         gamestate.is_check = true;
     } else {
         gamestate.is_check = false;
+    }
+    if (gamestate.black_pawns & Types::rank_4) {
+        gamestate.en_passant = true;
     }
 }
 
@@ -114,7 +129,9 @@ void make_white_bishop_move(Gamestate& gamestate, const u64 og_position, const u
     gamestate.white_bishops |= new_position;
     if (Movegen::generate_white_bishop_moves(new_position, gamestate.get_white_pieces(), gamestate.get_black_pieces()) &
         gamestate.black_king) {
+
         gamestate.is_check = true;
+
     } else {
         gamestate.is_check = false;
     }
@@ -127,7 +144,9 @@ void make_white_rook_move(Gamestate& gamestate, const u64 og_position, const u64
     gamestate.white_rooks |= new_position;
     if (Movegen::generate_white_rook_moves(new_position, gamestate.get_white_pieces(), gamestate.get_black_pieces()) &
         gamestate.black_king) {
+
         gamestate.is_check = true;
+
     } else {
         gamestate.is_check = false;
     }
@@ -143,6 +162,7 @@ void make_white_queen_move(Gamestate& gamestate, const u64 og_position, const u6
          gamestate.black_king) {
 
         gamestate.is_check = true;
+
     } else {
         gamestate.is_check = false;
     }
@@ -157,6 +177,9 @@ void make_black_pawn_move(Gamestate& gamestate, const u64 og_position, const u64
         gamestate.is_check = true;
     } else {
         gamestate.is_check = false;
+    }
+    if (gamestate.white_pawns & Types::rank_5) {
+        gamestate.en_passant = true;
     }
 }
 
@@ -179,7 +202,9 @@ void make_black_bishop_move(Gamestate& gamestate, const u64 og_position, const u
     gamestate.black_bishops |= new_position;
     if (Movegen::generate_black_bishop_moves(new_position, gamestate.get_black_pieces(), gamestate.get_black_pieces()) &
         gamestate.white_king) {
+
         gamestate.is_check = true;
+
     } else {
         gamestate.is_check = false;
     }
@@ -192,7 +217,9 @@ void make_black_rook_move(Gamestate& gamestate, const u64 og_position, const u64
     gamestate.black_rooks |= new_position;
     if (Movegen::generate_black_rook_moves(new_position, gamestate.get_black_pieces(), gamestate.get_black_pieces()) &
         gamestate.white_king) {
+
         gamestate.is_check = true;
+
     } else {
         gamestate.is_check = false;    
     }
@@ -208,6 +235,7 @@ void make_black_queen_move(Gamestate& gamestate, const u64 og_position, const u6
          gamestate.white_king) {
 
         gamestate.is_check = true;
+
     } else {
         gamestate.is_check = false;
     }
