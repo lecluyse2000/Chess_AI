@@ -50,7 +50,7 @@ inline constexpr u64 black_king_start = 0x1000000000000000ULL;
 
 }
 
-enum Piece
+enum class Piece : int
 {
 
     BL_ROOK, BL_KNIGHT, BL_BISHOP, BL_QUEEN, BL_KING,
@@ -58,7 +58,7 @@ enum Piece
 
 };
 
-enum Square
+enum class Square : int
 {
     A1_SQ, B1_SQ, C1_SQ, D1_SQ, E1_SQ, F1_SQ, G1_SQ, H1_SQ,
     A2_SQ, B2_SQ, C2_SQ, D2_SQ, E2_SQ, F2_SQ, G2_SQ, H2_SQ,

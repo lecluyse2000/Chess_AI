@@ -5,7 +5,7 @@
 #include <vector>
 
 #include "gamestate.h"
-#include "table.h"
+#include "util/table.h"
 
 using u64 = std::uint64_t;
 
